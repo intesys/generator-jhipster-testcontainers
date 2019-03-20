@@ -1,0 +1,7 @@
+dependencies {
+    testCompile "org.testcontainers:<%=artifactName%>:<%=testContainersVersion%>"
+}
+
+if (project.hasProperty('testcontainers')) { 
+    test { systemProperty 'spring.profiles.active', 'testcontainers' }
+}

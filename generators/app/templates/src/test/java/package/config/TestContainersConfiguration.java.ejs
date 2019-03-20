@@ -1,0 +1,88 @@
+package <%=packageName%>.config;
+
+import com.zaxxer.hikari.HikariDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.testcontainers.containers.JdbcDatabaseContainer;
+ <%_ if (prodDatabaseType === 'mysql') { _%>
+import org.testcontainers.containers.MySQLContainer;
+<%_ } else if (prodDatabaseType === 'mariadb') { _%>
+import org.testcontainers.containers.MariaDBContainer;
+<%_ } else if (prodDatabaseType === 'postgresql') { _%>
+import org.testcontainers.containers.PostgreSQLContainer;
+<%_ } else if (prodDatabaseType === 'mssql') { _%>
+import org.testcontainers.containers.MSSQLServerContainer;
+<%_ } else if (prodDatabaseType === 'oracle') { _%>
+import org.testcontainers.containers.OracleContainer;
+<%_ } _%>
+
+
+import javax.annotation.PreDestroy;
+import javax.sql.DataSource;
+
+@Configuration
+@Profile("testcontainers")
+public class IntegrationTestsConfiguration {
+
+    private Logger logger = LoggerFactory.getLogger(IntegrationTestsConfiguration.class);
+
+    private JdbcDatabaseContainer dbContainer;
+
+    @Bean
+    public DataSource dataSource() {
+        <%_ if (prodDatabaseType === 'mysql') { _%>
+        dbContainer = new MySQLContainer("<%= containerName %>")
+            .withDatabaseName("<%=baseName.toLowerCase()%>")
+            .withUsername("root")
+            .withPassword("");
+        dbContainer.setCommand("mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp");
+        String jdbcUrlSuffix = "?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
+        <%_ } else if (prodDatabaseType === 'mariadb') { _%>
+        dbContainer = new MariaDBContainer("<%= containerName %>")
+            .withDatabaseName("<%=baseName.toLowerCase()%>")
+            .withUsername("root")
+            .withPassword("");
+        dbContainer.setCommand("mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp");
+        String jdbcUrlSuffix = "?useLegacyDatetimeCode=false&serverTimezone=UTC";
+        <%_ } else if (prodDatabaseType === 'postgresql') { _%>
+        dbContainer = new PostgreSQLContainer("<%= containerName %>")
+            .withUsername("<%=baseName.toLowerCase()%>")
+            .withPassword("");
+        String jdbcUrlSuffix = "";
+        <%_ } else if (prodDatabaseType === 'mssql') { _%>
+        dbContainer = new MSSQLServerContainer("<%= containerName %>")
+            .withPassword("yourStrong(!)Password");
+        String jdbcUrlSuffix = "";
+        <%_ } else if (prodDatabaseType === 'oracle') { _%>
+        dbContainer = new OracleContainer("<%= containerName %>")
+        String jdbcUrlSuffix = "";
+        <%_ } _%>
+
+        dbContainer.start();
+
+        String jdbcUrl = dbContainer.getJdbcUrl() + jdbcUrlSuffix;
+        logger.info("Database started, creating datasource for url: '{}'", jdbcUrl);
+
+
+        HikariDataSource dataSource = new HikariDataSource();
+        dataSource.setJdbcUrl(jdbcUrl);
+        dataSource.setUsername(dbContainer.getUsername());
+        dataSource.setPassword(dbContainer.getPassword());
+        dataSource.setDriverClassName(dbContainer.getDriverClassName());
+        dataSource.setAutoCommit(false);
+
+        return dataSource;
+
+    }
+
+    @PreDestroy
+    public void preDestroy(){
+        if(this.dbContainer != null){
+            this.dbContainer.stop();
+        }
+    }
+
+}

@@ -1,0 +1,42 @@
+os:
+    - linux
+language: node_js
+services:
+  - docker
+node_js:
+    - "8.15.1"
+jdk:
+    - oraclejdk8
+addons:
+    apt:
+        packages:
+            - oracle-java8-set-default
+cache:
+    npm: true
+    directories:
+        - node_modules
+        - $HOME/.m2
+env:
+    matrix:
+        - JHIPSTER_VERSION=latest JHIPSTER_DATABASE=mysql
+        - JHIPSTER_VERSION=latest JHIPSTER_DATABASE=postgresql
+        - JHIPSTER_VERSION=latest JHIPSTER_DATABASE=mariadb
+        - JHIPSTER_VERSION=5.7.1 JHIPSTER_DATABASE=mariadb
+    global:
+        - JHIPSTER_TRAVIS=$TRAVIS_BUILD_DIR/travis
+before_install:
+    - export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+    - npm install -g yo
+    # fixme this should be removed (JHIPSTER_VERSION not considered)
+    - npm install -g generator-jhipster
+install:
+    - npm install
+    # - npm test
+    - npm link
+before_script:
+    - rm -r test
+script:
+    - chmod +x $JHIPSTER_TRAVIS/test-case.sh
+    - $JHIPSTER_TRAVIS/test-case.sh
+notifications:
+    email: false
