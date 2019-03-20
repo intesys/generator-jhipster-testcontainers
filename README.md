@@ -64,7 +64,7 @@ Apache-2.0 © [Intesys Srl]()
 
 [npm-image]: https://img.shields.io/npm/v/generator-jhipster-testcontainers.svg
 [npm-url]: https://npmjs.org/package/generator-jhipster-testcontainers
-[travis-image]: https://travis-ci.org/ecostanzi/generator-jhipster-testcontainers.svg?branch=master
-[travis-url]: https://travis-ci.org/ecostanzi/generator-jhipster-testcontainers
-[daviddm-image]: https://david-dm.org/ecostanzi/generator-jhipster-testcontainers.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/ecostanzi/generator-jhipster-testcontainers
+[travis-image]: https://travis-ci.org/intesys/generator-jhipster-testcontainers.svg?branch=master
+[travis-url]: https://travis-ci.org/intesys/generator-jhipster-testcontainers
+[daviddm-image]: https://david-dm.org/intesys/generator-jhipster-testcontainers.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/intesys/generator-jhipster-testcontainers

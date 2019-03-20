@@ -7,14 +7,14 @@
     "jhipster-module",
     "jhipster-5"
   ],
-  "homepage": "https://github.com/ecostanzi/generator-jhipster-testcontainers",
+  "homepage": "https://github.com/intesys/generator-jhipster-testcontainers",
   "files": [
     "generators"
   ],
   "main": "generators/app/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ecostanzi/generator-jhipster-testcontainers.git"
+    "url": "git+https://github.com/intesys/generator-jhipster-testcontainers.git"
   },
   "dependencies": {
     "chalk": "2.4.1",
@@ -45,6 +45,6 @@
   },
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/ecostanzi/generator-jhipster-testcontainers/issues"
+    "url": "https://github.com/intesys/generator-jhipster-testcontainers/issues"
   }
 }
