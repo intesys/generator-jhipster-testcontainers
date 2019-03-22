@@ -6,6 +6,8 @@
 
 This is a [JHipster](http://jhipster.github.io/) module to run Jhipster `@SpringBootTest` tests against your production database. A database container will automatically boot during the test startup phase. 
 
+At the moment only SQL databases are supported.
+
 This module will create a `@Configuration` which will override the default test datasource:
 ```java
 @Configuration
