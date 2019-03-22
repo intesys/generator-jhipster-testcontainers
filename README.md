@@ -59,7 +59,7 @@ With gradle:
 
 # License
 
-Apache-2.0 © [Intesys Srl]()
+Apache-2.0 © [Intesys Srl](https://www.intesys.it/)
 
 
 [npm-image]: https://img.shields.io/npm/v/generator-jhipster-testcontainers.svg
