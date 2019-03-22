@@ -4,7 +4,9 @@
 
 # Introduction
 
-This is a [JHipster](http://jhipster.github.io/) module, that is meant to be used in a JHipster application.
+This is a [JHipster](http://jhipster.github.io/) module to run jhipster `@SpringTest` annotated tests against your production database.
+
+
 
 # Prerequisites
 
