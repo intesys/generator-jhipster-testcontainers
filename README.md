@@ -1,10 +1,45 @@
 # generator-jhipster-testcontainers
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> A Jhipster module to run integration tests with java testcontainers
+> A Jhipster module to run integration tests with java [Testcontainers](https://www.testcontainers.org/)
 
 # Introduction
 
-This is a [JHipster](http://jhipster.github.io/) module to run jhipster `@SpringTest` annotated tests against your production database.
+This is a [JHipster](http://jhipster.github.io/) module to run Jhipster `@SpringBootTest` tests against your production database. A database container will automatically boot during the test startup phase. 
+
+This module will create a `@Configuration` which will override the default test datasource:
+```java
+@Configuration
+@Profile("testcontainers")
+public class IntegrationTestsConfiguration {
+
+    @Bean
+    public DataSource dataSource() {
+        dbContainer = new MSSQLServerContainer("microsoft/mssql-server-linux:latest")
+            .withPassword("yourStrong(!)Password");
+        dbContainer.start();
+        String jdbcUrl = dbContainer.getJdbcUrl() + jdbcUrlSuffix;
+        logger.info("Database started, creating datasource for url: '{}'", jdbcUrl);
+        HikariDataSource dataSource = new HikariDataSource();
+        dataSource.setJdbcUrl(jdbcUrl);
+        dataSource.setUsername(dbContainer.getUsername());
+        dataSource.setPassword(dbContainer.getPassword());
+        dataSource.setDriverClassName(dbContainer.getDriverClassName());
+        dataSource.setAutoCommit(false);
+        return dataSource;
+    }
+
+    @PreDestroy
+    public void preDestroy(){
+        if(this.dbContainer != null){
+            this.dbContainer.stop();
+        }
+    }
+
+}
+```
+
+H2 will still be the default option, use `testcontainers` profile to test using the production database.
+
 
 
 
