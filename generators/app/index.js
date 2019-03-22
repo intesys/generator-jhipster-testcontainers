@@ -111,11 +111,14 @@ module.exports = class extends BaseGenerator {
             `${jhipsterConstants.SERVER_TEST_RES_DIR}/config/application-testcontainers.yml.ejs`,
             `${jhipsterConstants.SERVER_TEST_RES_DIR}/config/application-testcontainers.yml`
         );
+
+        if (this.buildTool === 'gradle') {
+            this.template(
+                "gradle/testcontainers.gradle.ejs",
+                "gradle/testcontainers.gradle",
+            );
+        }
         
-        this.template(
-            "gradle/testcontainers.gradle.ejs",
-            "gradle/testcontainers.gradle",
-        );
     }
 
     end() {
