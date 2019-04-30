@@ -83,6 +83,14 @@ npm update -g generator-jhipster-testcontainers
 
 # Usage
 
+Run the module from your jhipster project folder:
+
+```bash
+yo jhipster-testcontainers
+```
+
+Now you can run the tests with testcontainers.
+
 With maven:
 
 ```bash
