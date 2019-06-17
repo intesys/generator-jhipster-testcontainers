@@ -1,6 +1,6 @@
 {
   "name": "generator-jhipster-testcontainers",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "A Jhipster module to run integration tests with java testcontainers",
   "keywords": [
     "yeoman-generator",
