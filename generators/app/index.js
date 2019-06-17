@@ -22,20 +22,18 @@ const jhipsterConstants = require('generator-jhipster/generators/generator-const
 module.exports = class extends BaseGenerator {
     get initializing() {
         return {
-            init(args) {
-                if (args === 'default') {
-                    // do something when argument is 'default'
-                }
-            },
             readConfig() {
-                this.jhipsterAppConfig = this.getJhipsterAppConfig();
+                try {
+                    this.jhipsterAppConfig = this.getAllJhipsterConfig();
+                } catch (TypeError) {
+                    //for jhipster 5.X
+                    this.jhipsterAppConfig = this.getJhipsterAppConfig();
+                }
                 if (!this.jhipsterAppConfig) {
                     this.error('Can\'t read .yo-rc.json');
                 }
             },
             displayLogo() {
-                // it's here to show that you can use functions from generator-jhipster
-                // this function is in: generator-jhipster/generators/generator-base.js
                 this.printJHipsterLogo();
 
                 // Have Yeoman greet the user.
@@ -44,7 +42,7 @@ module.exports = class extends BaseGenerator {
             checkJhipster() {
                 const currentJhipsterVersion = this.jhipsterAppConfig.jhipsterVersion;
                 const minimumJhipsterVersion = packagejs.dependencies['generator-jhipster'];
-                if (!semver.satisfies(currentJhipsterVersion, minimumJhipsterVersion)) {
+                if (!semver.satisfies(currentJhipsterVersion, '>=5.0.0 || >=6.0.0')) {
                     this.warning(`\nYour generated project used an old JHipster version (${currentJhipsterVersion})... you need at least (${minimumJhipsterVersion})\n`);
                 }
             }
