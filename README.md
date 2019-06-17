@@ -19,7 +19,7 @@ public class IntegrationTestsConfiguration {
         dbContainer = new MSSQLServerContainer("microsoft/mssql-server-linux:latest")
             .withPassword("yourStrong(!)Password");
         dbContainer.start();
-        String jdbcUrl = dbContainer.getJdbcUrl() + jdbcUrlSuffix;
+        String jdbcUrl = dbContainer.getJdbcUrl();
         logger.info("Database started, creating datasource for url: '{}'", jdbcUrl);
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setJdbcUrl(jdbcUrl);
@@ -42,8 +42,8 @@ public class IntegrationTestsConfiguration {
 
 H2 will still be the default option, use `testcontainers` profile to test using the production database.
 
-
-
+# Testcontainer JDBC support
+Testcontainers can be used also by simply modifying the `application.properties` test file and using driver `org.testcontainers.jdbc.ContainerDatabaseDriver`. See [testcontainers documentation](https://www.testcontainers.org/modules/databases/#database-containers-launched-via-jdbc-url-scheme) and [Jhipster with Testcontainers](https://atomfrede.gitlab.io/2019/05/jhipster-with-testcontainers/) for details.
 
 # Prerequisites
 
@@ -91,17 +91,25 @@ yo jhipster-testcontainers
 
 Now you can run the tests with testcontainers.
 
-With maven:
+With Jhipster 5:
 
 ```bash
+# maven
 ./mvnw test -Dspring.profiles.active=testcontainers
-```
 
-With gradle: 
-```bash
+# gradle
 ./gradlew test -Ptestcontainers
 ```
 
+With Jhipster 6:
+
+```bash
+# maven
+./mvnw verify -Dspring.profiles.active=testcontainers
+
+# gradle
+./gradlew integrationTest -Ptestcontainers
+```
 
 
 # License
