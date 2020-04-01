@@ -4,7 +4,7 @@
       "packageName": "com.mycompany.myapp",
       "nativeLanguage": "en"
     },
-    "basename": "myapp",
+    "baseName": "myapp",
     "applicationType": "microservice",
     "packageName": "com.mycompany.myapp",
     "packageFolder": "com/mycompany/myapp",
