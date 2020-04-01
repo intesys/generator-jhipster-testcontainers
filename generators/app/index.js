@@ -102,6 +102,14 @@ module.exports = class extends BaseGenerator {
         this.baseName = this.jhipsterAppConfig.baseName;
         this.containerName = `${dbInfo.containerName}`;
 
+        if (this.prodDatabaseType === 'mssql') {
+            this.mmsqlContainerVersion = this.containerName;
+            this.template(
+                `${jhipsterConstants.SERVER_TEST_RES_DIR}/container-license-acceptance.txt.ejs`,
+                `${jhipsterConstants.SERVER_TEST_RES_DIR}/container-license-acceptance.txt`
+            );
+        }
+
         this.template(
             `${jhipsterConstants.SERVER_TEST_SRC_DIR}package/config/TestContainersConfiguration.java.ejs`,
             `${testDir}config/IntegrationTestsConfiguration.java`
