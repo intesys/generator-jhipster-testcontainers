@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        sample: [postgresql]
+        sample: [mariadb-gradle, mssql-maven, mysql-maven, oracle-maven, postgresql-maven]
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v1
@@ -47,6 +47,7 @@ jobs:
                   -Dlogging.level.org.zalando=OFF \
                   -Dlogging.level.io.github.jhipster=OFF \
                   -Dlogging.level.com.mycompany.myapp=OFF \
+                  -Dlogging.level.org.testcontainers=INFO \
                   -Dlogging.level.org.springframework=OFF \
                   -Dlogging.level.org.springframework.web=OFF \
                   -Dlogging.level.org.springframework.security=OFF
@@ -62,6 +63,7 @@ jobs:
                   -Dlogging.level.com.mycompany.myapp=OFF \
                   -Dlogging.level.org.springframework=OFF \
                   -Dlogging.level.org.springframework.web=OFF \
+                  -Dlogging.level.org.testcontainers=INFO \
                   -Dlogging.level.org.springframework.security=OFF
           fi
         working-directory: ./test/templates/${{ matrix.sample }}

@@ -5,7 +5,7 @@
       "nativeLanguage": "en"
     },
     "baseName": "myapp",
-    "applicationType": "microservice",
+    "applicationType": "monolith",
     "packageName": "com.mycompany.myapp",
     "packageFolder": "com/mycompany/myapp",
     "serverPort": "8081",
@@ -13,8 +13,8 @@
     "cacheProvider": "no",
     "websocket": false,
     "databaseType": "sql",
-    "devDatabaseType": "postgresql",
-    "prodDatabaseType": "postgresql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
     "searchEngine": false,
     "messageBroker": false,
     "serviceDiscoveryType": false,
@@ -32,6 +32,6 @@
     "clientPackageManager": "npm",
     "blueprints": [],
     "skipClient": true,
-    "skipUserManagement": true
+    "skipUserManagement": false
   }
 }
