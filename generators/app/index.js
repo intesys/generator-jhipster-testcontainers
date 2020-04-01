@@ -77,7 +77,7 @@ module.exports = class extends BaseGenerator {
             return;
         }
 
-        this.testContainersVersion = '1.10.7';
+        this.testContainersVersion = '1.13.0';
         const dbInfo = dbInfos[this.prodDatabaseType];
         this.artifactName = dbInfo.artifactName;
         this.buildTool = this.jhipsterAppConfig.buildTool;
