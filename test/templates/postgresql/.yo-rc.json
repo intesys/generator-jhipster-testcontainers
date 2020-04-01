@@ -1,0 +1,26 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.mycompany.myapp",
+      "nativeLanguage": "en"
+    },
+    "applicationType": "microservice",
+    "baseName": "myapp",
+    "packageName": "com.mycompany.myapp",
+    "packageFolder": "com/mycompany/myapp",
+    "authenticationType": "jwt",
+    "cacheProvider": "no",
+    "enableHibernateCache": "no",
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "no",
+    "buildTool": "maven",
+    "jwtSecretKey": "ZGQwNGE0YzI4ZTFjNTI2OWUyZDFhMjA1YjQ3ZTdlYmIzMGU4NTY2M2U5NWMzODk3NThjNTAxMDYxMDA0MDkxMDZlZTJkMzQ0MGQ3NjQ5MWQwYzdhOWQ2ZjQyM2FkOWZjNzkwMTQyZWI2ZjI1NDQ3N2NhMWE1MTFhMjMyYmU4ZGY=",
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}

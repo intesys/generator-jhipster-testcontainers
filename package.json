@@ -1,14 +1,18 @@
 {
   "name": "generator-jhipster-testcontainers",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A Jhipster module to run integration tests with java testcontainers",
   "keywords": [
     "yeoman-generator",
     "jhipster-module",
-    "jhipster-5",
     "jhipster-6"
   ],
   "homepage": "https://github.com/intesys/generator-jhipster-testcontainers",
+  "author": {
+    "name": "Intesys SRL",
+    "email": "enrico.costanzi@intesys.it",
+    "url": "https://www.intesys.it"
+  },
   "files": [
     "generators"
   ],
@@ -18,24 +22,29 @@
     "url": "git+https://github.com/intesys/generator-jhipster-testcontainers.git"
   },
   "dependencies": {
-    "chalk": "2.4.1",
-    "generator-jhipster": "^5.8.2",
+    "chalk": "3.0.0",
+    "generator-jhipster": ">=6.0.0",
     "mkdirp": "0.5.1",
-    "semver": "5.3.0",
-    "shelljs": "0.5.3",
-    "lodash": ">=4.17.11",
-    "yeoman-generator": "3.1.1"
+    "semver": "7.1.1",
+    "shelljs": "0.8.3",
+    "yeoman-generator": "4.4.0"
   },
   "devDependencies": {
-    "eslint": "5.1.0",
-    "eslint-config-airbnb-base": "13.0.0",
-    "eslint-plugin-import": "2.13.0",
-    "fs-extra": "6.0.1",
-    "mocha": "5.2.0",
+    "eslint": "6.8.0",
+    "eslint-config-airbnb-base": "14.0.0",
+    "eslint-config-prettier": "6.9.0",
+    "eslint-plugin-import": "2.19.1",
+    "eslint-plugin-prettier": "3.1.2",
+    "fs-extra": "8.1.0",
+    "husky": "3.1.0",
+    "lint-staged": "9.5.0",
+    "mocha": "6.2.2",
+    "prettier": "1.19.1",
     "yeoman-assert": "3.1.1",
     "yeoman-test": "2.0.0"
   },
   "scripts": {
+    "prettier:format": "prettier --write \"{,**/}*.{js,json,md,yml}\"",
     "pretest": "eslint .",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
@@ -44,6 +53,17 @@
     "release:minor": "npm version minor -a -m \"Update to %s\" && npm run release",
     "release:major": "npm version major -a -m \"Update to %s\" && npm run release",
     "test": "mocha test"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,yml,md}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "license": "Apache-2.0",
   "bugs": {
