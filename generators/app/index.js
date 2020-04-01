@@ -116,11 +116,6 @@ module.exports = class extends BaseGenerator {
         );
 
         this.template(
-            `${jhipsterConstants.SERVER_TEST_SRC_DIR}package/config/TestContainersConfiguration.java.ejs`,
-            `${testDir}config/IntegrationTestsConfiguration.java`
-        );
-
-        this.template(
             `${jhipsterConstants.SERVER_TEST_RES_DIR}/config/application-testcontainers.yml.ejs`,
             `${jhipsterConstants.SERVER_TEST_RES_DIR}/config/application-testcontainers.yml`
         );
