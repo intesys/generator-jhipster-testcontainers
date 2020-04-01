@@ -30,7 +30,7 @@ describe('JHipster generator jhipster-testcontainers', () => {
             helpers
                 .run(path.join(__dirname, '../generators/app'))
                 .inTmpDir(dir => {
-                    fse.copySync(path.join(__dirname, '../test/templates/postgresql-maven'), dir);
+                    fse.copySync(path.join(__dirname, '../test/templates/mssql-maven'), dir);
                 })
                 .withOptions({
                     testmode: true
