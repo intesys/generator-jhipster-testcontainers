@@ -121,7 +121,7 @@ Apache-2.0 © [Intesys Srl](https://www.intesys.it/)
 
 [npm-image]: https://img.shields.io/npm/v/generator-jhipster-testcontainers.svg
 [npm-url]: https://npmjs.org/package/generator-jhipster-testcontainers
-[travis-image]: https://travis-ci.org/intesys/generator-jhipster-testcontainers.svg?branch=master
-[travis-url]: https://travis-ci.org/intesys/generator-jhipster-testcontainers
+[github-actions-image]: https://github.com/intesys/generator-jhipster-testcontainers/workflows/Build/badge.svg
+[github-actions-url]: https://github.com/intesys/generator-jhipster-testcontainers/actions
 [daviddm-image]: https://david-dm.org/intesys/generator-jhipster-testcontainers.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/intesys/generator-jhipster-testcontainers
