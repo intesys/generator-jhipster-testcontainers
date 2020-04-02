@@ -1,5 +1,7 @@
 # generator-jhipster-testcontainers
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+
+[![NPM version][npm-image]][npm-url] [![Build Status][github-actions-image]][github-actions-url] [![Dependency Status][daviddm-image]][daviddm-url]
+
 > A Jhipster module to run integration tests with java [Testcontainers](https://www.testcontainers.org/)
 
 # Introduction
