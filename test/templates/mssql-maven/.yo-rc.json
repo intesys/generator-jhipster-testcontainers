@@ -1,0 +1,37 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.mycompany.myapp",
+      "nativeLanguage": "en"
+    },
+    "baseName": "myapp",
+    "applicationType": "monolith",
+    "packageName": "com.mycompany.myapp",
+    "packageFolder": "com/mycompany/myapp",
+    "serverPort": "8081",
+    "authenticationType": "jwt",
+    "cacheProvider": "no",
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mssql",
+    "prodDatabaseType": "mssql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "OTgzZTM5MTFhYTc4MWRmZTkyODA4MTllZjhhNTRmYzY4ODFjZjJjM2MzZTQwNjc0MDQxMzJiZDA5MjdmZTU5OGI2MjRkZWU4MjEzMzgyYjgxOTA0MjE2MWRmMWRhYzFjNzEwMWUxN2FhMGViZmFmYWQ1NTkwNDBhYzdjNTRmNWQ=",
+    "embeddableLaunchScript": false,
+    "creationTimestamp": 1585772046730,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "clientPackageManager": "npm",
+    "blueprints": [],
+    "skipClient": true,
+    "skipUserManagement": false
+  }
+}

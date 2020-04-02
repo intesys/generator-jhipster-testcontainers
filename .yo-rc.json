@@ -1,0 +1,10 @@
+{
+  "generator-jhipster-module": {
+    "promptValues": {
+      "githubName": "intesys",
+      "authorName": "Intesys SRL",
+      "authorEmail": "enrico.costanzi@intesys.it",
+      "authorUrl": "https://www.intesys.it"
+    }
+  }
+}
