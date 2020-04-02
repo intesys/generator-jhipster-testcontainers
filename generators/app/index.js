@@ -96,29 +96,26 @@ module.exports = class extends BaseGenerator {
         }
 
         this.packageFolder = this.jhipsterAppConfig.packageFolder;
-        const testDir = `${jhipsterConstants.SERVER_TEST_SRC_DIR + this.packageFolder}/`;
 
         this.packageName = this.jhipsterAppConfig.packageName;
         this.baseName = this.jhipsterAppConfig.baseName;
         this.containerName = `${dbInfo.containerName}`;
-
-        if (this.prodDatabaseType === 'mssql') {
-            this.mmsqlContainerVersion = this.containerName;
-            this.template(
-                `${jhipsterConstants.SERVER_TEST_RES_DIR}/container-license-acceptance.txt.ejs`,
-                `${jhipsterConstants.SERVER_TEST_RES_DIR}/container-license-acceptance.txt`
-            );
+        this.containerVersion = 'latest';
+        if (this.containerName.includes(':')) {
+            this.containerVersion = this.containerName.split(':')[1];
         }
-
-        this.template(
-            `${jhipsterConstants.SERVER_TEST_SRC_DIR}package/config/TestContainersConfiguration.java.ejs`,
-            `${testDir}config/IntegrationTestsConfiguration.java`
-        );
 
         this.template(
             `${jhipsterConstants.SERVER_TEST_RES_DIR}/config/application-testcontainers.yml.ejs`,
             `${jhipsterConstants.SERVER_TEST_RES_DIR}/config/application-testcontainers.yml`
         );
+
+        if (this.prodDatabaseType === 'oracle') {
+            this.copy(
+                `${jhipsterConstants.SERVER_TEST_RES_DIR}/testcontainers.properties`,
+                `${jhipsterConstants.SERVER_TEST_RES_DIR}/testcontainers.properties`
+            );
+        }
 
         if (this.buildTool === 'gradle') {
             this.template('gradle/testcontainers.gradle.ejs', 'gradle/testcontainers.gradle');

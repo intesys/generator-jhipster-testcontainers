@@ -2,23 +2,28 @@ spring:
     datasource:
        type: com.zaxxer.hikari.HikariDataSource
        <%_ if (prodDatabaseType === 'mysql') { _%>
-       url: jdbc:mysql://localhost:3306/<%= baseName %>?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
+       driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+       url: jdbc:tc:mysql:<%= containerVersion %>:///<%= baseName %>?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
        username: root
        password:
        <%_ } else if (prodDatabaseType === 'mariadb') { _%>
-       url: jdbc:mariadb://localhost:3306/<%= baseName %>?useLegacyDatetimeCode=false&serverTimezone=UTC
+       driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+       url: jdbc:tc:mariadb:<%= containerVersion %>:///<%= baseName %>?useLegacyDatetimeCode=false&serverTimezone=UTC
        username: root
        password:
        <%_ } else if (prodDatabaseType === 'postgresql') { _%>
-       url: jdbc:postgresql://localhost:5432/<%= baseName %>
+       driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+       url: jdbc:tc:postgresql:<%= containerVersion %>:///<%= baseName %>
        username: <%= baseName %>
        password:
        <%_ } else if (prodDatabaseType === 'mssql') { _%>
-       url: jdbc:sqlserver://localhost:1433;database=<%= baseName %>
+       driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+       url: jdbc:tc:sqlserver:<%= containerVersion %>://;database=<%= baseName %>
        username: SA
        password: yourStrong(!)Password
        <%_ } else if (prodDatabaseType === 'oracle') { _%>
-       url: jdbc:oracle:thin:@localhost:1521:xe
+       driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+       url: jdbc:tc:oracle:thin:@///ORCL
        username: system
        password: oracle
        <%_ } _%>
