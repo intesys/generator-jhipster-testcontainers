@@ -6,84 +6,14 @@
 
 # Introduction
 
-This is a [JHipster](http://jhipster.github.io/) module to run Jhipster `@SpringBootTest` tests against your production database. A database container will automatically boot during the test startup phase. 
+This is a [JHipster](http://jhipster.github.io/) module to run Jhipster `@SpringBootTest` tests against on production database.
+A database container will automatically boot during the test startup phase.
 
-At the moment only SQL databases are supported.
-
-This module will create a `@Configuration` which will override the default test datasource:
-```java
-@Configuration
-@Profile("testcontainers")
-public class IntegrationTestsConfiguration {
-
-    @Bean
-    public DataSource dataSource() {
-        dbContainer = new MSSQLServerContainer("microsoft/mssql-server-linux:latest")
-            .withPassword("yourStrong(!)Password");
-        dbContainer.start();
-        String jdbcUrl = dbContainer.getJdbcUrl();
-        logger.info("Database started, creating datasource for url: '{}'", jdbcUrl);
-        HikariDataSource dataSource = new HikariDataSource();
-        dataSource.setJdbcUrl(jdbcUrl);
-        dataSource.setUsername(dbContainer.getUsername());
-        dataSource.setPassword(dbContainer.getPassword());
-        dataSource.setDriverClassName(dbContainer.getDriverClassName());
-        dataSource.setAutoCommit(false);
-        return dataSource;
-    }
-
-    @PreDestroy
-    public void preDestroy(){
-        if(this.dbContainer != null){
-            this.dbContainer.stop();
-        }
-    }
-
-}
-```
-
-H2 will still be the default option, use `testcontainers` profile to test using the production database.
-
-# Testcontainer JDBC support
-Testcontainers can be used also by simply modifying the `application.properties` test file and using driver `org.testcontainers.jdbc.ContainerDatabaseDriver`. See [testcontainers documentation](https://www.testcontainers.org/modules/databases/#database-containers-launched-via-jdbc-url-scheme) and [Jhipster with Testcontainers](https://atomfrede.gitlab.io/2019/05/jhipster-with-testcontainers/) for details.
-
-# Prerequisites
-
-As this is a [JHipster](http://jhipster.github.io/) module, we expect you have JHipster and its related tools already installed:
-
-- [Installing JHipster](https://jhipster.github.io/installation.html)
-
-# Installation
-
-## With Yarn
-
-To install this module:
-
-```bash
-yarn global add generator-jhipster-testcontainers
-```
-
-To update this module:
-
-```bash
-yarn global upgrade generator-jhipster-testcontainers
-```
-
-## With NPM
-
-To install this module:
+# Usage
 
 ```bash
 npm install -g generator-jhipster-testcontainers
 ```
-
-To update this module:
-
-```bash
-npm update -g generator-jhipster-testcontainers
-```
-
-# Usage
 
 Run the module from your jhipster project folder:
 
@@ -91,19 +21,7 @@ Run the module from your jhipster project folder:
 yo jhipster-testcontainers
 ```
 
-Now you can run the tests with testcontainers.
-
-With Jhipster 5:
-
-```bash
-# maven
-./mvnw test -Dspring.profiles.active=testcontainers
-
-# gradle
-./gradlew test -Ptestcontainers
-```
-
-With Jhipster 6:
+Run tests with the `testcontainers` spring profile
 
 ```bash
 # maven
@@ -113,11 +31,59 @@ With Jhipster 6:
 ./gradlew integrationTest -Ptestcontainers
 ```
 
+Example with mysql:
+
+```java
+🐳 [mysql:8.0.19]                        : Creating container for image: mysql:8.0.19
+🐳 [mysql:8.0.19]                        : Starting container with ID: ce2bc59ebbd1e02d0cffa6f04fca43a10c516818a2d8be90720f833a639151b6
+🐳 [mysql:8.0.19]                        : Container mysql:8.0.19 is starting: ce2bc59ebbd1e02d0cffa6f04fca43a10c516818a2d8be90720f833a639151b6
+🐳 [mysql:8.0.19]                        : Waiting for database connection to become available at jdbc:mysql://localhost:32770/academydb using query 'SELECT 1'
+🐳 [mysql:8.0.19]                        : Container is started (JDBC URL: jdbc:mysql://localhost:32770/testdb)
+🐳 [mysql:8.0.19]                        : Container mysql:8.0.19 started in PT17.8709687S
+com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+```
+
+> IMPORTANT: H2 will still be the default option, use `testcontainers` profile to test using testcontainers.
+
+# How it works
+
+As for [testcontainers documentation](https://www.testcontainers.org/modules/databases/#database-containers-launched-via-jdbc-url-scheme):
+
+> As long as you have Testcontainers and the appropriate JDBC driver on your classpath, you can simply modify regular
+> JDBC connection URLs to get a fresh containerized instance of the database each time your application starts up.
+
+This module simply adds a properties file in your test resources: `application-testcontainers.yml` and uses. This is
+how mysql properties will look like.
+
+```properties
+spring.datasource.driver-class-name=org.testcontainers.jdbc.ContainerDatabaseDriver
+spring.datasource.url=jdbc:tc:mysql:8.0.19://hostname/testdb
+```
+
+# Additional steps
+
+### Mysql, Postgres, Mariadb
+
+No additional steps required
+
+### SQL Server
+
+Due to licencing restrictions you are required to accept an EULA for this container image.
+To indicate that you accept the MS SQL Server image EULA, place a file at the root of the classpath named
+`container-license-acceptance.txt`, e.g. at `src/test/resources/container-license-acceptance.txt`.
+This file should contain the line:
+
+```
+mcr.microsoft.com/mssql/server:latest
+```
+
+### Oracle
+
+Modify the file `testcontainers.properties`, containing oracle.container.image=IMAGE, where IMAGE is a suitable image name and tag.
 
 # License
 
 Apache-2.0 © [Intesys Srl](https://www.intesys.it/)
-
 
 [npm-image]: https://img.shields.io/npm/v/generator-jhipster-testcontainers.svg
 [npm-url]: https://npmjs.org/package/generator-jhipster-testcontainers

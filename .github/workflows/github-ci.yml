@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        sample: [mariadb-gradle, mssql-maven, mysql-maven, oracle-maven, postgresql-maven]
+        sample: [mariadb-gradle, mysql-maven, postgresql-maven]
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v1

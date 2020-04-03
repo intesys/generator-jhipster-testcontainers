@@ -2,7 +2,6 @@ const path = require('path');
 const fse = require('fs-extra');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
-const jhipsterConstants = require('generator-jhipster/generators/generator-constants');
 
 describe('JHipster generator jhipster-testcontainers', () => {
     describe('Test with postgres', () => {
@@ -24,13 +23,16 @@ describe('JHipster generator jhipster-testcontainers', () => {
         it('generate testcontainers application properties', () => {
             assert.file(['src/test/resources/config/application-testcontainers.yml']);
         });
+        it('does not generate testcontainers.properties file', () => {
+            assert.noFile(['src/test/resources/testcontainers.properties']);
+        });
     });
-    describe('Test with mssql', () => {
+    describe('Test with oracle', () => {
         beforeEach(done => {
             helpers
                 .run(path.join(__dirname, '../generators/app'))
                 .inTmpDir(dir => {
-                    fse.copySync(path.join(__dirname, '../test/templates/mssql-maven'), dir);
+                    fse.copySync(path.join(__dirname, '../test/templates/oracle-maven'), dir);
                 })
                 .withOptions({
                     testmode: true
@@ -41,9 +43,8 @@ describe('JHipster generator jhipster-testcontainers', () => {
                 .on('end', done);
         });
 
-        it('generate container license acceptance', () => {
-            assert.file(['src/test/resources/container-license-acceptance.txt']);
-            assert.fileContent('src/test/resources/container-license-acceptance.txt', jhipsterConstants.DOCKER_MSSQL);
+        it('generate testcontainers.properties file', () => {
+            assert.file(['src/test/resources/testcontainers.properties']);
         });
     });
 });
