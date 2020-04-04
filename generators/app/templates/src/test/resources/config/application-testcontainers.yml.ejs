@@ -3,27 +3,27 @@ spring:
        type: com.zaxxer.hikari.HikariDataSource
        <%_ if (prodDatabaseType === 'mysql') { _%>
        driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
-       url: jdbc:tc:mysql:<%= containerVersion %>:///<%= baseName %>?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
+       url: jdbc:tc:mysql:<%= containerVersion %>:///<%= baseName %>?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&TC_TMPFS=/testtmpfs:rw
        username: root
        password:
        <%_ } else if (prodDatabaseType === 'mariadb') { _%>
        driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
-       url: jdbc:tc:mariadb:<%= containerVersion %>:///<%= baseName %>?useLegacyDatetimeCode=false&serverTimezone=UTC
+       url: jdbc:tc:mariadb:<%= containerVersion %>:///<%= baseName %>?useLegacyDatetimeCode=false&serverTimezone=UTC&TC_TMPFS=/testtmpfs:rw
        username: root
        password:
        <%_ } else if (prodDatabaseType === 'postgresql') { _%>
        driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
-       url: jdbc:tc:postgresql:<%= containerVersion %>:///<%= baseName %>
+       url: jdbc:tc:postgresql:<%= containerVersion %>:///<%= baseName %>?TC_TMPFS=/testtmpfs:rw
        username: <%= baseName %>
        password:
        <%_ } else if (prodDatabaseType === 'mssql') { _%>
        driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
-       url: jdbc:tc:sqlserver:<%= containerVersion %>://;database=<%= baseName %>
+       url: jdbc:tc:sqlserver:<%= containerVersion %>://;database=<%= baseName %>?TC_TMPFS=/testtmpfs:rw
        username: SA
        password: yourStrong(!)Password
        <%_ } else if (prodDatabaseType === 'oracle') { _%>
        driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
-       url: jdbc:tc:oracle:thin:@///ORCL
+       url: jdbc:tc:oracle:thin:@///ORCL?TC_TMPFS=/testtmpfs:rw
        username: system
        password: oracle
        <%_ } _%>
