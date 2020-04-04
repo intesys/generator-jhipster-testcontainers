@@ -52,8 +52,9 @@ As for [testcontainers documentation](https://www.testcontainers.org/modules/dat
 > As long as you have Testcontainers and the appropriate JDBC driver on your classpath, you can simply modify regular
 > JDBC connection URLs to get a fresh containerized instance of the database each time your application starts up.
 
-This module simply adds a properties file in your test resources: `application-testcontainers.yml` and uses. This is
-how mysql properties will look like.
+This module simply adds a properties file in your test resources: `application-testcontainers.yml` and uses it when launching tests with `testcontainers` profile. 
+
+This is how mysql properties look like.
 
 ```properties
 spring.datasource.driver-class-name=org.testcontainers.jdbc.ContainerDatabaseDriver
